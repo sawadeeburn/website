@@ -39,6 +39,12 @@ The logo, colours and pictures are free to use for the burn: a poster, a flag, a
 The few rules are on the [brand kit page](https://sawadee-burn-site.pages.dev/brand).
 Please don't use them on things for sale or next to a sponsor.
 
+## Licence
+
+Apache License 2.0: see `LICENSE`. Copy it, change it, build on it.
+The licence does not cover the name and the logo as a trademark (its section 6), so please follow the brand kit rules when you use them.
+The fonts in `public/assets/fonts/` are other people's work, under the SIL Open Font License.
+
 ## Credits
 
 Fonts: Bricolage Grotesque, Montserrat and Noto Sans Thai (SIL Open Font License).
