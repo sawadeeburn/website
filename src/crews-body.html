@@ -40,7 +40,17 @@
       <li><span><b>Get your link.</b> sawadeeburn.com/crew/your-name. It goes straight to the ticket page.</span></li>
       <li><span><b>Send it to your people.</b> Each ticket through it lights a lamp.</span></li>
     </ol>
-    <p class="start-cta"><a class="btn btn-sea btn-big" href="{{START_URL}}" rel="noopener">Start a crew</a></p>
+    <form class="crew-form start-cta" id="crew-form" action="/api/crew" method="post" enctype="multipart/form-data">
+      <label>Crew name<input name="crew" required maxlength="40" autocomplete="off"></label>
+      <label>Your first name<input name="name" required maxlength="40" autocomplete="given-name"></label>
+      <label>WhatsApp or email<input name="contact" required maxlength="80" autocomplete="email" placeholder="So we can send you the link"></label>
+      <label><span>One line about your crew <i>(optional)</i></span><input name="line" maxlength="80"></label>
+      <label><span>Flag picture <i>(optional, up to 4 MB)</i></span><input name="flag" type="file" accept="image/png,image/jpeg,image/webp,image/gif"></label>
+      <label class="hp" aria-hidden="true">Leave this empty<input name="website" tabindex="-1" autocomplete="off"></label>
+      <button class="btn btn-sea btn-big" type="submit">Start a crew</button>
+      <p class="form-msg" id="crew-msg" role="status" aria-live="polite"></p>
+      <p class="crews-small form-alt">Rather email? <a class="link" href="{{START_URL}}">Write to us</a></p>
+    </form>
     <p class="crews-small">A crew with a gift for everyone can grow into a camp. <a class="link" href="https://www.sawadeeburn.com/camps" rel="noopener">How camps work</a></p>
   </div>
 </section>

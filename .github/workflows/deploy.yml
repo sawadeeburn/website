@@ -4,6 +4,7 @@ on:
     branches: [main]
     paths:
       - "public/**"
+      - "functions/**"
       - ".github/workflows/deploy.yml"
   workflow_dispatch:
 concurrency:

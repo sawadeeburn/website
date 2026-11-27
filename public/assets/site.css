@@ -494,3 +494,15 @@ main>.community{padding-bottom:clamp(72px,9vw,132px);overflow:visible}
 .steps b{font-weight:800}
 @media (min-width:900px){.start-grid{grid-template-columns:1fr 1.1fr;align-items:start;align-content:start}.start-grid h2{grid-row:1/span 3}.start-cta,.start-grid>.crews-small{grid-column:2}}
 @media (prefers-reduced-motion:reduce){.js .lamps i{animation:none}.crew{transition:none}}
+
+.crew-form{display:grid;gap:14px;max-width:34rem}
+.crew-form label{display:grid;gap:6px;font-weight:800;font-size:.95rem}
+.crew-form label i{font-style:normal;font-weight:600;opacity:.75}
+.crew-form input{font:600 1rem/1.3 Montserrat,"Noto Sans Thai",system-ui,sans-serif;color:var(--sea);background:var(--cream);border:2px solid var(--sea);border-radius:0;padding:.7em .8em;width:100%}
+.crew-form input[type=file]{padding:.55em .6em;background:transparent}
+.crew-form input:focus-visible{outline:3px solid var(--sea);outline-offset:2px}
+.crew-form .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.crew-form button{justify-self:start;margin-top:6px;cursor:pointer;border:0}
+.crew-form button[disabled]{opacity:.6;cursor:progress}
+.form-msg{font-weight:800;min-height:1.4em}
+.form-alt{margin-top:0}

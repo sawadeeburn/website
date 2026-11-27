@@ -16,3 +16,24 @@
     btn.textContent = words[++n % words.length];
   });
 })();
+
+/* /crews: the start-a-crew form posts in the background; the email link stays as a fallback. */
+(() => {
+  const f = document.getElementById('crew-form'), msg = document.getElementById('crew-msg');
+  if (!f) return;
+  f.addEventListener('submit', async e => {
+    e.preventDefault();
+    const file = f.flag.files[0];
+    if (file && file.size > 4 * 1024 * 1024) { msg.textContent = 'That picture is over 4 MB. Try a smaller one.'; return; }
+    const btn = f.querySelector('button'); btn.disabled = true; msg.textContent = 'Sending...';
+    try {
+      const r = await fetch(f.action, { method: 'POST', body: new FormData(f) });
+      const d = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error(d.error || 'failed');
+      f.reset();
+      msg.textContent = "Got it. We'll send your crew link soon.";
+    } catch (err) {
+      msg.textContent = err.message && err.message !== 'failed' ? err.message : "That didn't go through. Use the email link below.";
+    } finally { btn.disabled = false; }
+  });
+})();

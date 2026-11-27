@@ -15,7 +15,7 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="/assets/fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/montserrat.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/site.css?v=1795765187">
+<link rel="stylesheet" href="/assets/site.css?v=1795765738">
 <script>(function(){try{var t=localStorage.getItem('sb-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}document.documentElement.classList.add('js')})()</script>
 </head>
 <body>
@@ -80,7 +80,17 @@
       <li><span><b>Get your link.</b> sawadeeburn.com/crew/your-name. It goes straight to the ticket page.</span></li>
       <li><span><b>Send it to your people.</b> Each ticket through it lights a lamp.</span></li>
     </ol>
-    <p class="start-cta"><a class="btn btn-sea btn-big" href="mailto:ticketing@sawadeeburn.com?cc=sean.katz%40gmail.com&subject=Start%20a%20crew&body=Crew%20name%3A%20%0AYour%20first%20name%3A%20%0AWhatsApp%3A%20%0AOne%20line%20about%20your%20crew%20(optional)%3A%20%0A%0AAttach%20a%20picture%20for%20your%20flag%20if%20you%20have%20one." rel="noopener">Start a crew</a></p>
+    <form class="crew-form start-cta" id="crew-form" action="/api/crew" method="post" enctype="multipart/form-data">
+      <label>Crew name<input name="crew" required maxlength="40" autocomplete="off"></label>
+      <label>Your first name<input name="name" required maxlength="40" autocomplete="given-name"></label>
+      <label>WhatsApp or email<input name="contact" required maxlength="80" autocomplete="email" placeholder="So we can send you the link"></label>
+      <label><span>One line about your crew <i>(optional)</i></span><input name="line" maxlength="80"></label>
+      <label><span>Flag picture <i>(optional, up to 4 MB)</i></span><input name="flag" type="file" accept="image/png,image/jpeg,image/webp,image/gif"></label>
+      <label class="hp" aria-hidden="true">Leave this empty<input name="website" tabindex="-1" autocomplete="off"></label>
+      <button class="btn btn-sea btn-big" type="submit">Start a crew</button>
+      <p class="form-msg" id="crew-msg" role="status" aria-live="polite"></p>
+      <p class="crews-small form-alt">Rather email? <a class="link" href="mailto:ticketing@sawadeeburn.com?cc=sean.katz%40gmail.com&subject=Start%20a%20crew&body=Crew%20name%3A%20%0AYour%20first%20name%3A%20%0AWhatsApp%3A%20%0AOne%20line%20about%20your%20crew%20(optional)%3A%20%0A%0AAttach%20a%20picture%20for%20your%20flag%20if%20you%20have%20one.">Write to us</a></p>
+    </form>
     <p class="crews-small">A crew with a gift for everyone can grow into a camp. <a class="link" href="https://www.sawadeeburn.com/camps" rel="noopener">How camps work</a></p>
   </div>
 </section>
@@ -107,7 +117,7 @@
 
 <script src="/assets/motion/assets.js" defer></script>
 <script src="/assets/motion/sawadee-motion.js" defer></script>
-<script src="/assets/site.js?v=1795765187" defer></script>
-<script src="/assets/crews.js?v=1795765187" defer></script>
+<script src="/assets/site.js?v=1795765738" defer></script>
+<script src="/assets/crews.js?v=1795765738" defer></script>
 </body>
 </html>
