@@ -129,7 +129,7 @@ a.soc:active{transform:scale(.94)}
 .nav-logo{width:clamp(132px,13vw,190px);margin-right:auto;position:relative;z-index:1;min-height:44px;display:grid;align-items:center}
 .logo{width:100%;height:auto}
 .nav-links{display:flex;align-items:center;gap:clamp(12px,1.9vw,28px);position:relative;z-index:1}
-.nav-links a{font-weight:700;font-size:.8125rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;padding-block:.9em;background:linear-gradient(currentColor,currentColor) 0 calc(100% - .55em)/0 2px no-repeat;transition:background-size .3s var(--ease)}
+.nav-links a{white-space:nowrap;font-weight:700;font-size:.8125rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;padding-block:.9em;background:linear-gradient(currentColor,currentColor) 0 calc(100% - .55em)/0 2px no-repeat;transition:background-size .3s var(--ease)}
 .nav-links a:hover{background-size:100% 2px}
 .nav-links .th{font-family:"Noto Sans Thai",sans-serif;letter-spacing:0;font-size:1rem;text-transform:none}
 .nav-links .nav-cta{background:var(--on-paper);color:var(--paper);padding:.85em 1.1em;transition:background .2s,color .2s}
