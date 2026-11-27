@@ -326,8 +326,6 @@ def build():
     (PUB / "assets/motion").mkdir(exist_ok=True)
     for f in ("assets.js", "sawadee-motion.js"): shutil.copy(FC / "motion" / f, PUB / "assets/motion" / f)
     shutil.copy(FC / "final-badge-avatar.svg", PUB / "favicon.svg")   # the W badge stays the tab icon (the symbol blurs at 16px)
-    shutil.copy(HERE / "src/draft-concept.html", PUB / "draft-concept.html")   # CONCEPT only
-    (PUB / "draft-avatar.html").write_text((HERE / "src/draft-avatar.html").read_text().replace("{{LOGO}}", LOGO))   # CONCEPT only: Artem's symbol as the avatar
     for f in ("artem-avatar.svg", "artem-avatar-plain.svg", "artem-mark.svg", "final-badge-avatar.svg"): shutil.copy(FC / f, PUB / "assets/img" / f)
     (PUB / "404.html").write_text(t.split("<main")[0].replace("<title>", "<title>Not found · ").replace('"assets/', '"/assets/').replace('"favicon.svg', '"/favicon.svg').replace('href="#', 'href="/#') +
         '<main id="main"><section class="hero f-paper lost"><div class="wrap"><h1 class="big"><span class="fit">Lost on the beach.</span></h1>'
