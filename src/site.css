@@ -158,6 +158,60 @@ main>.hero{padding-block:clamp(8px,1.5vw,20px) 0;min-height:calc(100svh - 68px);
 .hero-print{margin-bottom:clamp(20px,3vw,40px);align-self:stretch;min-height:clamp(240px,34vh,460px)}
 .hero-print img{position:absolute;inset:0;height:100%;object-fit:cover;object-position:60% 52%}
 .s-hero{left:-2.2em;top:-2.6em;--r:-9deg}
+/* countdown as a printed ticket: the body counts down to the end of the first round (then to the burn),
+   the tear-off stub is the ticket button. Labels are page text; the numbers come from site.js */
+.tkt{--tk:var(--on-paper);--tk-ink:var(--paper);--tk-hot:var(--gold);--notch:12px;display:grid;max-width:27rem;margin-top:clamp(16px,1.8vw,24px);rotate:-1.2deg;transform-origin:0 0}
+:root[data-theme="dark"] .tkt{--tk-hot:var(--rust)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tkt{--tk-hot:var(--rust)}}
+.tkt-body{color:var(--tk-ink);padding:.7rem 1.1rem .8rem;
+  background:radial-gradient(circle var(--notch) at 0 100%,#0000 97%,var(--tk)) left/51% 100% no-repeat,radial-gradient(circle var(--notch) at 100% 100%,#0000 97%,var(--tk)) right/51% 100% no-repeat}
+.tkt-body:not(:has(.cd:not([hidden]))){display:none}
+.cd[hidden]{display:none}
+.cd{margin:0}
+.cd-n:empty{display:none}
+.cd-n i{font-style:normal;white-space:nowrap}
+.cd-n b{font-weight:inherit}
+/* the main count: ticket fields, a small caption over a big number */
+.tkt .cd:first-child,.tkt .cd[hidden]+.cd{display:grid;gap:.55rem}
+.tkt .cd[hidden]{display:none}
+.tkt .cd:first-child .cd-l,.tkt .cd[hidden]+.cd .cd-l{font-weight:700;font-size:.9375rem;line-height:1.25;padding-bottom:.5rem;border-bottom:2px solid currentColor}
+.tkt .cd:first-child .cd-n,.tkt .cd[hidden]+.cd .cd-n{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));font-variant-numeric:tabular-nums}
+.tkt .cd:first-child .cd-n i,.tkt .cd[hidden]+.cd .cd-n i{display:flex;flex-direction:column-reverse;gap:.3rem;padding-left:.7rem;border-left:1px solid color-mix(in srgb,currentColor 38%,transparent)}
+.tkt .cd:first-child .cd-n i:first-child,.tkt .cd[hidden]+.cd .cd-n i:first-child{padding-left:0;border-left:0;color:var(--tk-hot)}
+.tkt .cd:first-child .cd-n b,.tkt .cd[hidden]+.cd .cd-n b{font-family:Bricolage,"Arial Narrow",sans-serif;font-weight:800;font-stretch:75%;font-size:clamp(3.4rem,5.2vw,4.8rem);line-height:.8;letter-spacing:-.01em}
+.tkt .cd:first-child .cd-n small,.tkt .cd[hidden]+.cd .cd-n small{font-weight:700;font-size:.6875rem;line-height:1;letter-spacing:.16em;text-transform:uppercase;color:var(--tk-ink)}
+/* the second count: one quiet line at the foot of the ticket */
+.tkt .cd:first-child:not([hidden])+.cd{display:flex;flex-wrap:wrap;justify-content:space-between;gap:0 1rem;margin-top:.75rem;padding-top:.45rem;border-top:1px solid color-mix(in srgb,currentColor 38%,transparent);font-weight:700;font-size:.8125rem;line-height:1.3}
+.tkt .cd:first-child:not([hidden])+.cd .cd-n{display:flex;gap:.7em;font-variant-numeric:tabular-nums}
+.tkt .cd:first-child:not([hidden])+.cd .cd-n i:nth-child(n+3){display:none}
+.tkt .cd:first-child:not([hidden])+.cd .cd-n small{font-size:1em;margin-left:.3em}
+.js .cd-n i.flip b{animation:reprint .5s var(--ease)}
+@keyframes reprint{from{opacity:.2;transform:translate(.05em,.06em)}to{opacity:1;transform:none}}
+/* the stub: torn along the dashes */
+.tkt-stub{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:56px;padding:.5em 1.1rem .44em;border-top:3px dashed var(--paper);color:#04191D;text-decoration:none;
+  font-family:Bricolage,sans-serif;font-stretch:75%;font-weight:800;font-size:clamp(1.5rem,2.2vw,1.9rem);line-height:1;text-transform:uppercase;transform-origin:0 0;transition:transform .3s var(--ease);
+  background:radial-gradient(circle var(--notch) at 0 0,#0000 97%,var(--tang)) left/51% 100% no-repeat,radial-gradient(circle var(--notch) at 100% 0,#0000 97%,var(--tang)) right/51% 100% no-repeat}
+.tkt-stub svg{width:1.3em;height:auto;flex:none;transition:transform .3s var(--ease)}
+.tkt-stub:hover{transform:translateY(3px) rotate(1.4deg)}
+.tkt-stub:hover svg{transform:translateX(4px)}
+.hero .tkt+.hero-actions{margin-top:clamp(8px,1vw,14px)}
+/* the fuse: the rule over "Until the burn" burns from right to left as the first round runs down, one small flame at its end.
+   site.js sets --p (time used, 0 to 1) and shows it; no flame without it, and none once the first round is over */
+.tkt .cd{position:relative}
+.fuse{position:absolute;left:0;right:0;top:-1px;height:1px;pointer-events:none;--x:calc((1 - var(--p,0)) * 100%)}
+.fuse[hidden]{display:none}
+.tkt .cd:first-child:not([hidden])+.cd:has(.fuse:not([hidden])){border-top-color:transparent}
+.fuse::before{content:"";position:absolute;left:0;top:0;height:1px;width:var(--x);background:color-mix(in srgb,currentColor 38%,transparent)}
+.fuse::after{content:"";position:absolute;left:calc(var(--x) + 10px);top:-.5px;width:min(46px,calc(100% - var(--x) - 10px));height:2px;background:radial-gradient(circle 1px,var(--tang) 95%,#0000) 0 0/8px 2px repeat-x;-webkit-mask:linear-gradient(90deg,#000,#0000);mask:linear-gradient(90deg,#000,#0000)}
+.fuse svg{position:absolute;left:var(--x);bottom:-4px;width:14px;height:19.6px;margin-left:-7px;overflow:visible}
+.fl-o{fill:var(--tang)}
+.fl-i{fill:var(--gold);transform:translate(.9px,-.5px)}
+.fl-o,.fl-i{transform-box:fill-box;transform-origin:50% 100%}
+.js .fl-o{animation:flame 2.8s ease-in-out infinite}
+.js .fl-i{animation:flame-in 2.1s ease-in-out infinite}
+@keyframes flame{0%,100%{transform:none}30%{transform:scaleY(1.07) skewX(-3deg)}55%{transform:scaleY(.95) skewX(2deg)}80%{transform:scaleY(1.04) skewX(-1.5deg)}}
+@keyframes flame-in{0%,100%{transform:translate(.9px,-.5px)}40%{transform:translate(.5px,-.5px) scaleY(.88)}70%{transform:translate(1.1px,-.5px) scaleY(1.08)}}
+@media (max-width:900px){.tkt{max-width:30rem}.tkt .cd:first-child .cd-n b,.tkt .cd[hidden]+.cd .cd-n b{font-size:clamp(3.4rem,17vw,4.8rem)}}
 /* the hero's one moment: the two plates are pulled, then the tangerine plate slides into register */
 .js .plate{animation:pull .9s var(--ease) both}
 .js .p2{animation-name:register;animation-duration:1.1s;animation-delay:.28s}
@@ -229,7 +283,7 @@ main>.follow{padding-block:clamp(28px,4vw,56px)}
 .ignite{height:190px;width:100%;cursor:pointer;overflow:hidden}
 .ignite svg{transform:scale(2.3)}
 .film .lede{margin-top:clamp(18px,2vw,28px)}
-.player{position:relative;max-width:520px;justify-self:end;width:100%;transform:rotate(1.4deg);background:var(--cream);padding:10px 10px 0}
+.player{position:relative;max-width:520px;justify-self:end;width:100%;background:var(--cream);padding:10px 10px 0}
 .player video{width:100%;height:auto;aspect-ratio:4/5;background:#041B1F;object-fit:cover}
 .player-bar{display:flex;gap:8px;padding:8px 0}
 .pbtn{flex:1;min-height:48px;border:0;cursor:pointer;background:var(--sea);color:var(--cream);font:800 1.15rem/1 Bricolage,sans-serif;font-stretch:75%;text-transform:uppercase;transition:background .2s,color .2s}
@@ -398,7 +452,7 @@ main>.community{padding-bottom:0;overflow:hidden}
   .hero-print{margin-top:8px}
   .s-hero{right:-.4em;top:-2em}
   .door .stk{right:-.3em}
-  .player{justify-self:center;transform:rotate(1deg)}
+  .player{justify-self:center}
   .film-strip img,.community-print img{aspect-ratio:4/3}
   .greeter{max-width:420px;margin-inline:auto}
   .burn-print{max-width:520px}

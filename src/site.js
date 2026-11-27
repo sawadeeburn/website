@@ -118,4 +118,39 @@
     });
     none.hidden = shown > 0;
   });
+  /* --- countdowns: fill in the numbers; a countdown that has run out goes away.
+     Each unit keeps its own element, so only a number that changed is printed again (.flip) --- */
+  const cds = $$('.cd[data-to]');
+  if (cds.length) {
+    const pad = n => String(n).padStart(2, '0');
+    const tick = () => {
+      const now = Date.now();
+      cds.forEach(c => {
+        const left = Date.parse(c.dataset.to) - now, out = c.querySelector('.cd-n');
+        if (left <= 0) { c.hidden = true; return; }
+        const s = Math.floor(left / 1000), d = Math.floor(s / 86400), h = Math.floor(s / 3600) % 24, m = Math.floor(s / 60) % 60;
+        const parts = [[String(d), d === 1 ? 'day' : 'days'], [pad(h), 'hrs'], [pad(m), 'min']];
+        if (!reduce) parts.push([pad(s % 60), 'sec']);
+        if (out.children.length !== parts.length) { out.innerHTML = parts.map(([n, u]) => '<i><b>' + n + '</b><small>' + u + '</small></i>').join(''); return; }
+        parts.forEach(([n, u], k) => {
+          const el = out.children[k], b = el.firstChild;
+          if (b.textContent === n) return;
+          b.textContent = n; el.lastChild.textContent = u;
+          if (u !== 'sec') { el.classList.remove('flip'); void el.offsetWidth; el.classList.add('flip'); }
+        });
+      });
+    };
+    tick(); setInterval(tick, reduce ? 30000 : 1000);
+  }
+  /* --- the fuse on the ticket: the flame sits at (time used / whole first round) along the rule, from the right --- */
+  const fuse = $('.tkt .fuse'), fcd = $('.tkt .cd[data-from]');
+  if (fuse && fcd) {
+    const lit = () => {
+      const t0 = Date.parse(fcd.dataset.from), t1 = Date.parse(fcd.dataset.to), now = Date.now();
+      if (now < t0 || now >= t1) { fuse.hidden = true; return; }
+      fuse.style.setProperty('--p', ((now - t0) / (t1 - t0)).toFixed(4));
+      fuse.hidden = false;
+    };
+    lit(); setInterval(lit, 60000);
+  }
 })();
