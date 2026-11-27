@@ -23,11 +23,11 @@ No photos are used.
 | Greeter figure | The welcome | Cut-bust greeter, gate only, never burnt | `brand-src/6a-wai-bust-cut-mark.svg` |
 | Logo | Nav, footer (animated: BURN glows) | Final lockup | `brand-src/final-lockup.svg` |
 | Route map | Getting there | Coast of the Gulf, Khanom town, Don Sak, islands, airports | Natural Earth 10m (public domain), `tools/map.py` |
-| `video/film.mp4` | Film | Our drawn Khanom film (people gather, play, the burn), without its opening map shot | made by the team, drawn in code |
+| `video/film.mp4`, `video/film-poster.webp` | Film | "Not a Festival", the type-only Overprint film (32.7 s), full length; poster = the NOT A FESTIVAL frame | `marketing/video/not-a-festival/film-web.mp4` (private repo), made in code, no AI images |
 
 ## Checks done
 - No bicycles in any picture.
-- No site address, no pin on the site. The map dot is Khanom town. The web film starts after the film's opening map shot.
+- No site address, no pin on the site. The map dot is Khanom town. The film has no map.
 - No fire near the W or the greeter. The burn picture sits in its own section with no mark in it.
 - No temples, Buddha images, monks, royal symbols, alcohol, drugs, fireworks, sky lanterns or figure burns.
 - The burning piece is a woven tower of straight timber: no figure, no roof shape.
