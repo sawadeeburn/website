@@ -142,4 +142,15 @@
     };
     tick(); setInterval(tick, reduce ? 30000 : 1000);
   }
+  /* --- the fuse on the ticket: the flame sits at (time used / whole first round) along the rule, from the right --- */
+  const fuse = $('.tkt .fuse'), fcd = $('.tkt .cd[data-from]');
+  if (fuse && fcd) {
+    const lit = () => {
+      const t0 = Date.parse(fcd.dataset.from), t1 = Date.parse(fcd.dataset.to), now = Date.now();
+      if (now < t0 || now >= t1) { fuse.hidden = true; return; }
+      fuse.style.setProperty('--p', ((now - t0) / (t1 - t0)).toFixed(4));
+      fuse.hidden = false;
+    };
+    lit(); setInterval(lit, 60000);
+  }
 })();
