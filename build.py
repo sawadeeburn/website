@@ -266,7 +266,7 @@ def build():
     for f in ("site.css", "site.js"): shutil.copy(HERE / "src" / f, PUB / "assets" / f)
     (PUB / "assets/motion").mkdir(exist_ok=True)
     for f in ("assets.js", "sawadee-motion.js"): shutil.copy(FC / "motion" / f, PUB / "assets/motion" / f)
-    shutil.copy(FC / "artem-avatar.svg", PUB / "favicon.svg")   # CONCEPT: try Artem's symbol as the avatar
+    shutil.copy(FC / "final-badge-avatar.svg", PUB / "favicon.svg")   # the W badge stays the tab icon (the symbol blurs at 16px)
     shutil.copy(HERE / "src/draft-concept.html", PUB / "draft-concept.html")   # CONCEPT only
     (PUB / "draft-avatar.html").write_text((HERE / "src/draft-avatar.html").read_text().replace("{{LOGO}}", LOGO))   # CONCEPT only: Artem's symbol as the avatar
     for f in ("artem-avatar.svg", "artem-avatar-plain.svg", "artem-mark.svg", "final-badge-avatar.svg"): shutil.copy(FC / f, PUB / "assets/img" / f)

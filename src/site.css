@@ -448,3 +448,9 @@ main>.community{padding-bottom:0;overflow:hidden}
 .plist-box .plist li::before{font-size:clamp(1.4rem,2.2vw,2rem)}
 .plist-box .small{padding-bottom:1rem}
 @media (max-width:900px){.tickets-grid{grid-template-columns:minmax(0,1fr)}}
+
+/* Artem's symbol: a round stamp in the hero and the social avatar. Never in one lockup with the W name. */
+.stk-sym{padding:0}
+.stk-sym i{display:block;width:64%;aspect-ratio:252/177;margin-top:-6%;background:var(--sea);-webkit-mask:url(img/artem-mark.svg) center/contain no-repeat;mask:url(img/artem-mark.svg) center/contain no-repeat}
+.find-av{display:flex;align-items:center;gap:1rem;margin-block:1.4rem 1.6rem;font-weight:700}
+.find-av img{width:64px;height:64px;border-radius:50%;flex:none}
