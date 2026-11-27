@@ -37,7 +37,7 @@ PRINCIPLES = [
     ("Communal Effort", "We build, support and protect our shared spaces and art together."),
     ("Civic Responsibility", "We look after each other and follow local law: here, the laws and customs of Thailand."),
     ("Leaving No Trace", "We clean up after ourselves, take out what we brought, and leave the land better if we can."),
-    ("Participation", "Change comes from taking part fully. Doing rather than watching."),
+    ("Participation", "Change comes from taking part fully. Take part instead of watching."),
     ("Immediacy", "Be here now. Drop what stands between you and the people and place around you."),
 ]
 
@@ -48,7 +48,7 @@ FAQ = [
     ("The basics", [
         ("Is it a festival? Is it Burning Man?", "Neither. The people who come make all of it: there is no lineup, no main stage and no VIP area. We are inspired by the 10 Principles of Burning Man, but this is not an Official Burning Man event and is not affiliated with Burning Man Project."),
         ("I have never been to a burn. Can I come?", "Yes. First-timers and seasoned burners are equally welcome. Come self-reliant, with what you need for six days."),
-        ("Where, when and how big?", "2-7 March 2027 in Khanom, on Thailand's Gulf coast. The exact site address goes out with your ticket. We plan for 1,000 to 1,500 people. It is our first full-length burn, so that is a plan rather than a promise."),
+        ("Where, when and how big?", "2-7 March 2027 in Khanom, on Thailand's Gulf coast. The exact site address goes out with your ticket. We plan for 1,000 to 1,500 people. It is our first full-length burn, so that number may change."),
         ("How do I get a ticket?", 'Only on Ticketmelon, and only in advance: <a href="#tickets">see the ticket rules</a>.'),
         # refund wording = our Ticketmelon event page (ticketing/ticketmelon/raw/10-advanced-setting.txt): refund policy + organizer's disclaimer. Never "full refund".
         ("Can I transfer my ticket, or get a refund?", f"All sales are final. There are no refunds unless the event is cancelled or postponed. If we don't sell enough tickets to make the event happen, all ticket payments will be refunded, minus Ticketmelon's processing fee. The rules for transfers and name changes are not published yet. If you need an answer before you buy, email {MAIL}."),
@@ -57,7 +57,7 @@ FAQ = [
     ("Camping and packing", [
         ("Where do I sleep?", "In your tent. Everyone camps: in a theme camp, or in free camping, which means camping outside a camp, not free entry. Bring shade and earplugs. Campervans and sleeping in cars are not settled yet, so don't book one."),
         ("What do I bring?", "Enough for six days without shops: shelter and shade, sleeping gear, food, water, a reusable cup and plate, sun and rain cover, insect repellent, your own medication, a small first-aid kit, a torch with spare batteries, a battery pack, rubbish bags and sturdy shoes. The full list comes in the Survival Guide."),
-        ("Is there food, water or power?", "Plan as if there is none. Food is not for sale, and a gifted meal is a gift, not catering. Bring your own water: four litres a day each is a sensible baseline, and water on site is not confirmed yet. Power goes to approved art and camps only, so you cannot charge a phone."),
+        ("Is there food, water or power?", "Plan as if there is none. Food is not for sale, so bring all of yours. Bring your own water: four litres a day each is a sensible baseline, and water on site is not confirmed yet. Power goes to approved art and camps only, so you cannot charge a phone."),
         ("What is there on site?", "Toilets and showers, and medical and welfare cover. No shops and no public Wi-Fi. Don't count on phone signal: download your ticket and directions before you leave."),
     ]),
     ("On site", [
