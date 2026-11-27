@@ -454,3 +454,11 @@ main>.community{padding-bottom:0;overflow:hidden}
 .stk-sym i{display:block;width:64%;aspect-ratio:252/177;margin-top:-6%;background:var(--sea);-webkit-mask:url(img/artem-mark.svg) center/contain no-repeat;mask:url(img/artem-mark.svg) center/contain no-repeat}
 .find-av{display:flex;align-items:center;gap:1rem;margin-block:1.4rem 1.6rem;font-weight:700}
 .find-av img{width:64px;height:64px;border-radius:50%;flex:none}
+
+/* v3.1 (Artem's notes): the film is back beside "Built by everyone who comes"; the page end gets room to breathe */
+.burn .burn-grid{grid-template-columns:minmax(0,5fr) minmax(0,7fr);align-items:center}
+.burn .player{justify-self:start}
+.burn .burn-copy .claims{margin-top:clamp(24px,3vw,40px)}
+main>.community{padding-bottom:clamp(72px,9vw,132px);overflow:visible}
+.community .s-crew{top:auto;bottom:-1.4em}
+@media (max-width:900px){.burn .burn-grid{grid-template-columns:minmax(0,1fr)}.burn .player{justify-self:center}}
