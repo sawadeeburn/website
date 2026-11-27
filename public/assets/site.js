@@ -142,4 +142,41 @@
     };
     tick(); setInterval(tick, reduce ? 30000 : 1000);
   }
+  /* --- time is burning: the ticket chars from the right edge as the first round runs down.
+     The front sits at (time used / whole round) of the ticket's width. Drawn in the ticket's own pixels. --- */
+  const burn = $('.tkt-burn'), bcd = $('.tkt .cd[data-from]');
+  if (burn && bcd) {
+    const body = burn.parentNode, NS = 'http://www.w3.org/2000/svg', emb = $('.b-emb', burn);
+    const E = [[13, .16, 2.1], [30, .44, 1.5], [21, .72, 2.3], [47, .28, 1.3], [58, .84, 1.7], [39, .58, 1.2], [78, .5, 1.4], [96, .22, 1.1]];
+    E.forEach((e, k) => { const c = document.createElementNS(NS, 'circle'); c.style.setProperty('--k', k); emb.appendChild(c); });
+    const r1 = n => Math.round(n * 10) / 10;
+    const draw = () => {
+      const t0 = Date.parse(bcd.dataset.from), t1 = Date.parse(bcd.dataset.to), now = Date.now();
+      const W = body.clientWidth, H = body.clientHeight;
+      if (now < t0 || now >= t1 || bcd.hidden || !W) { burn.setAttribute('hidden', ''); return; }
+      burn.removeAttribute('hidden');
+      burn.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+      const fx = Math.min(W - 9, Math.max(9, W * (1 - (now - t0) / (t1 - t0))));
+      const x = y => fx + 7 * Math.sin(y * .06 + 1.3) + 3 * Math.sin(y * .17 + .4) + 1.2 * Math.sin(y * .41 + 2);
+      let line = '', halo = '';
+      for (let y = -3; y <= H + 3; y += 2) line += (line ? 'L' : 'M') + r1(x(y)) + ' ' + y;
+      /* heat ahead of the front: three rows of halftone dots, smaller the further they are from it */
+      for (let y = 4, n = 0; y < H; y += 6, n++) [[7, 1.9], [13.5, 1.3], [20, .8]].forEach(([d, r], j) => {
+        if ((n + j) % 2) return;
+        const cx = r1(x(y) - d - r);
+        halo += 'M' + cx + ' ' + y + 'a' + r + ' ' + r + ' 0 1 0 ' + 2 * r + ' 0a' + r + ' ' + r + ' 0 1 0 ' + -2 * r + ' 0';
+      });
+      $('.b-char', burn).setAttribute('d', 'M' + (W + 30) + ' -3' + line.replace('M', 'L') + 'L' + (W + 30) + ' ' + (H + 3) + 'Z');
+      $('.b-edge', burn).setAttribute('d', line);
+      const hot = $('.b-hot', burn); hot.setAttribute('d', line); hot.setAttribute('transform', 'translate(3.5 0)');
+      $('.b-halo', burn).setAttribute('d', halo);
+      E.forEach(([d, f, r], k) => {
+        const c = emb.children[k], cy = f * H, cx = x(cy) + d;
+        c.setAttribute('cx', r1(cx)); c.setAttribute('cy', r1(cy)); c.setAttribute('r', r);
+        c.style.display = cx > W - 4 ? 'none' : '';
+      });
+    };
+    draw(); setInterval(draw, 60000);
+    if ('ResizeObserver' in window) new ResizeObserver(draw).observe(body); else addEventListener('resize', draw);
+  }
 })();

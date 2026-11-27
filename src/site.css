@@ -195,6 +195,28 @@ main>.hero{padding-block:clamp(8px,1.5vw,20px) 0;min-height:calc(100svh - 68px);
 .tkt-stub:hover{transform:translateY(3px) rotate(1.4deg)}
 .tkt-stub:hover svg{transform:translateX(4px)}
 .hero .tkt+.hero-actions{margin-top:clamp(8px,1vw,14px)}
+/* time is burning: the first round's ticket chars from its right edge to the left as the round runs down (site.js draws it).
+   The burnt part sits under the words, so the numbers stay readable. The symbol stamp keeps well away from it. */
+.tkt{--char:#03171B;--scorch:var(--tang)}
+:root[data-theme="dark"] .tkt{--char:#D6B193;--scorch:var(--rust)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tkt{--char:#D6B193;--scorch:var(--rust)}}
+.tkt-body{position:relative}
+.tkt-body .cd{position:relative;z-index:1}
+.tkt-burn{position:absolute;inset:0;width:100%;height:100%;overflow:hidden;pointer-events:none;
+  -webkit-mask:radial-gradient(circle var(--notch) at 0 100%,#0000 97%,#000) left/51% 100% no-repeat,radial-gradient(circle var(--notch) at 100% 100%,#0000 97%,#000) right/51% 100% no-repeat;
+  mask:radial-gradient(circle var(--notch) at 0 100%,#0000 97%,#000) left/51% 100% no-repeat,radial-gradient(circle var(--notch) at 100% 100%,#0000 97%,#000) right/51% 100% no-repeat}
+.tkt-burn[hidden]{display:none}
+.b-char{fill:var(--char)}
+.b-halo{fill:var(--scorch)}
+.b-hot{fill:none;stroke:var(--tang);stroke-width:5;stroke-linejoin:round}
+.b-edge{fill:none;stroke:var(--gold);stroke-width:2;stroke-linejoin:round}
+.b-emb circle{fill:var(--gold)}
+.b-emb circle:nth-child(odd){fill:var(--tang)}
+.js .b-edge{animation:glow 2.6s steps(1) infinite}
+.js .b-emb circle{animation:ember 3.4s ease-in-out infinite;animation-delay:calc(var(--k) * -.83s)}
+@keyframes glow{0%,100%{opacity:1}23%{opacity:.72}31%{opacity:1}58%{opacity:.82}66%{opacity:1}84%{opacity:.6}89%{opacity:1}}
+@keyframes ember{0%,100%{opacity:.25}45%{opacity:1}60%{opacity:.7}}
+@media (min-width:901px){.hero .s-hero{left:auto;right:-1.4em;top:-3.4em;--r:9deg}}
 @media (max-width:900px){.tkt{max-width:30rem}.tkt .cd:first-child .cd-n b,.tkt .cd[hidden]+.cd .cd-n b{font-size:clamp(3.4rem,17vw,4.8rem)}}
 /* the hero's one moment: the two plates are pulled, then the tangerine plate slides into register */
 .js .plate{animation:pull .9s var(--ease) both}
@@ -267,7 +289,7 @@ main>.follow{padding-block:clamp(28px,4vw,56px)}
 .ignite{height:190px;width:100%;cursor:pointer;overflow:hidden}
 .ignite svg{transform:scale(2.3)}
 .film .lede{margin-top:clamp(18px,2vw,28px)}
-.player{position:relative;max-width:520px;justify-self:end;width:100%;transform:rotate(1.4deg);background:var(--cream);padding:10px 10px 0}
+.player{position:relative;max-width:520px;justify-self:end;width:100%;background:var(--cream);padding:10px 10px 0}
 .player video{width:100%;height:auto;aspect-ratio:4/5;background:#041B1F;object-fit:cover}
 .player-bar{display:flex;gap:8px;padding:8px 0}
 .pbtn{flex:1;min-height:48px;border:0;cursor:pointer;background:var(--sea);color:var(--cream);font:800 1.15rem/1 Bricolage,sans-serif;font-stretch:75%;text-transform:uppercase;transition:background .2s,color .2s}
@@ -436,7 +458,7 @@ main>.community{padding-bottom:0;overflow:hidden}
   .hero-print{margin-top:8px}
   .s-hero{right:-.4em;top:-2em}
   .door .stk{right:-.3em}
-  .player{justify-self:center;transform:rotate(1deg)}
+  .player{justify-self:center}
   .film-strip img,.community-print img{aspect-ratio:4/3}
   .greeter{max-width:420px;margin-inline:auto}
   .burn-print{max-width:520px}
