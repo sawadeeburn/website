@@ -1,7 +1,10 @@
 name: Deploy
-# Until the two Cloudflare secrets are set on this repo, the site is deployed from the team's private repo.
-# Then add:  push: {branches: [main], paths: ["public/**"]}
 on:
+  push:
+    branches: [main]
+    paths:
+      - "public/**"
+      - ".github/workflows/deploy.yml"
   workflow_dispatch:
 concurrency:
   group: deploy
