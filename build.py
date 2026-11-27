@@ -256,7 +256,7 @@ def build_brand(v):
 # Each crew: slug (a-z0-9-, its short link), name, flag (file in crews-flags/ or ""), code (3 characters from the
 # pre-made pool; the Ticketmelon affiliate link is aff1=<code>, e.g. kzt; Ticketmelon codes allow only a-z and 0-9, so names can change any time), tickets (from that
 # link), line (optional, one short line), live (true once its Ticketmelon link exists).
-CREW_START = ("mailto:ticketing@sawadeeburn.com?subject=Start%20a%20crew&body=Crew%20name%3A%20%0A"
+CREW_START = ("mailto:ticketing@sawadeeburn.com?cc=sean.katz%40gmail.com&subject=Start%20a%20crew&body=Crew%20name%3A%20%0A"
               "Your%20first%20name%3A%20%0AWhatsApp%3A%20%0AOne%20line%20about%20your%20crew%20(optional)%3A%20%0A%0A"
               "Attach%20a%20picture%20for%20your%20flag%20if%20you%20have%20one.")
 FLAG_INKS = [("var(--gold)", "var(--sea)"), ("var(--tang)", "#04191D"), ("var(--sea)", "var(--cream)"), ("var(--rust)", "var(--cream)")]
