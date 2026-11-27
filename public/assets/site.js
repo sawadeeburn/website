@@ -118,7 +118,8 @@
     });
     none.hidden = shown > 0;
   });
-  /* --- countdowns: fill in the numbers; a countdown that has run out goes away --- */
+  /* --- countdowns: fill in the numbers; a countdown that has run out goes away.
+     Each unit keeps its own element, so only a number that changed is printed again (.flip) --- */
   const cds = $$('.cd[data-to]');
   if (cds.length) {
     const pad = n => String(n).padStart(2, '0');
@@ -126,14 +127,18 @@
       const now = Date.now();
       cds.forEach(c => {
         const left = Date.parse(c.dataset.to) - now, out = c.querySelector('.cd-n');
-        if (left <= 0) { if (c.dataset.gone === 'hide') c.hidden = true; else out.textContent = ''; return; }
+        if (left <= 0) { c.hidden = true; return; }
         const s = Math.floor(left / 1000), d = Math.floor(s / 86400), h = Math.floor(s / 3600) % 24, m = Math.floor(s / 60) % 60;
-        const parts = [[d, d === 1 ? 'day' : 'days'], [pad(h), 'hrs'], [pad(m), 'min']];
+        const parts = [[String(d), d === 1 ? 'day' : 'days'], [pad(h), 'hrs'], [pad(m), 'min']];
         if (!reduce) parts.push([pad(s % 60), 'sec']);
-        out.innerHTML = parts.map(([n, u]) => '<i>' + n + '<small>' + u + '</small></i>').join('');
+        if (out.children.length !== parts.length) { out.innerHTML = parts.map(([n, u]) => '<i><b>' + n + '</b><small>' + u + '</small></i>').join(''); return; }
+        parts.forEach(([n, u], k) => {
+          const el = out.children[k], b = el.firstChild;
+          if (b.textContent === n) return;
+          b.textContent = n; el.lastChild.textContent = u;
+          if (u !== 'sec') { el.classList.remove('flip'); void el.offsetWidth; el.classList.add('flip'); }
+        });
       });
-      const box = $('.count');
-      if (box && cds.every(c => c.hidden)) box.hidden = true;
     };
     tick(); setInterval(tick, reduce ? 30000 : 1000);
   }
