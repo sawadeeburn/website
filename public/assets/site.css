@@ -506,10 +506,13 @@ main>.community{padding-bottom:0;overflow:hidden}
 /* Artem's symbol: a round stamp in the hero and the social avatar. Never in one lockup with the W name. */
 .stk-sym{padding:0}
 .stk-sym i{display:block;width:64%;aspect-ratio:252/177;margin-top:-6%;background:var(--sea);-webkit-mask:url(img/artem-mark.svg) center/contain no-repeat;mask:url(img/artem-mark.svg) center/contain no-repeat}
+/* Artem, 27 Nov 2026: the symbol stands upright, so both palms sit level. No tilt, also on hover. */
+.stk.stk-sym{--r:0deg}
+.print:hover .stk-sym,.door:hover .stk-sym,.community:hover .stk-sym{transform:scale(1.04)}
 .find-av{display:flex;align-items:center;gap:1rem;margin-block:1.4rem 1.6rem;font-weight:700}
 .find-av img{width:64px;height:64px;border-radius:50%;flex:none}
 
-/* v3.1 (Artem's notes): the film is back beside "Built by everyone who comes"; the page end gets room to breathe */
+/* v3.1 (Artem's notes): the film is back beside the burn title; the page end gets room to breathe */
 .burn .burn-grid{grid-template-columns:minmax(0,5fr) minmax(0,7fr);align-items:center}
 .burn .player{justify-self:start}
 .burn .burn-copy .claims{margin-top:clamp(24px,3vw,40px)}
