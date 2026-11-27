@@ -9,6 +9,7 @@ HERE = Path(__file__).resolve().parent
 FC = HERE / "brand-src"            # the fixed logo files and the motion kit
 PUB = HERE / "public"
 TICKETS = "https://www.ticketmelon.com/MarkusHouse/SawadeeBurn2027"
+SITE = "https://sawadee-burn-site.pages.dev"   # absolute base for link previews (og:image); change when sawadeeburn.com points here
 
 # ---------- fixed logo: paths copied as they are; each path keeps its own fill-rule ----------
 def paths(fn): return re.findall(r'<path[^>]*d="([^"]*)"', (FC / fn).read_text())
@@ -314,7 +315,7 @@ def site_shell(t):
 
 def build():
     t = (HERE / "src/index.html").read_text()
-    rep = {"LOGO": LOGO, "MARK": MARK, "GREETER": GREETER, "TICKER": TICKER, "TICKETS": TICKETS, "MAP": map_svg(),
+    rep = {"SITE": SITE, "LOGO": LOGO, "MARK": MARK, "GREETER": GREETER, "TICKER": TICKER, "TICKETS": TICKETS, "MAP": map_svg(),
            "ROUTE_TABS": route_tabs(), "ROUTE_PANELS": route_panels(), "PRINCIPLES": principles(), "FAQ": faq(), "SOCIAL_ROW": social("s-row", True), "SOCIAL_BIG": social("s-big"), "SOCIAL_FOOT": social("s-row s-foot", True), "SOCIAL_BAND": social("s-big s-band"), "REPO": REPO, "V": str(int(time.time()))}
     for k, v in rep.items(): t = t.replace("{{" + k + "}}", v)
     assert "{{" not in t, re.findall(r"\{\{\w+\}\}", t)
