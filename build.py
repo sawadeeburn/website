@@ -254,7 +254,7 @@ def build_brand(v):
 
 # ---------- /crews: the crew board. Data in crews.json (opt-in, public). Points don't matter, no prizes. ----------
 # Each crew: slug (a-z0-9-, its short link), name, flag (file in crews-flags/ or ""), code (3 characters from the
-# pre-made pool; the Ticketmelon affiliate link is aff1=crew-<code>, e.g. crew-kzt, so names can change any time), tickets (from that
+# pre-made pool; the Ticketmelon affiliate link is aff1=<code>, e.g. kzt; Ticketmelon codes allow only a-z and 0-9, so names can change any time), tickets (from that
 # link), line (optional, one short line), live (true once its Ticketmelon link exists).
 CREW_START = ("mailto:ticketing@sawadeeburn.com?subject=Start%20a%20crew&body=Crew%20name%3A%20%0A"
               "Your%20first%20name%3A%20%0AWhatsApp%3A%20%0AOne%20line%20about%20your%20crew%20(optional)%3A%20%0A%0A"
@@ -272,6 +272,7 @@ def build_crews(v, head, foot, data=None):
     crews = data if data is not None else json.loads((HERE / "crews.json").read_text())
     for c in crews:
         assert re.fullmatch(r"[a-z0-9-]{2,40}", c["slug"]), f"bad crew slug: {c['slug']}"
+        assert re.fullmatch(r"[a-z0-9]+", c.get("code", "")), f"bad Ticketmelon code for {c['slug']}"
     crews = sorted(crews, key=lambda c: (-c.get("tickets", 0), c["name"].lower()))
     rows = ""
     for i, c in enumerate(crews):
@@ -300,7 +301,7 @@ def build_crews(v, head, foot, data=None):
     if flags.is_dir():
         shutil.copytree(flags, PUB / "crews/flags", dirs_exist_ok=True)
     # short links: /crew/<slug> -> Ticketmelon with the crew's affiliate code (only once its link exists there)
-    redir = "".join(f'/crew/{c["slug"]} {TICKETS}?aff1=crew-{c["code"]} 302\n' for c in crews if c.get("live"))
+    redir = "".join(f'/crew/{c["slug"]} {TICKETS}?aff1={c["code"]} 302\n' for c in crews if c.get("live"))
     (PUB / "_redirects").write_text(redir)
     print("built", PUB / "crews/index.html", len(crews), "crews,", redir.count("\n"), "links")
 
