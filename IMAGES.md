@@ -4,21 +4,21 @@ Every picture on the site is drawn by us in code. No photos, no AI images, no pe
 No photos are used.
 
 ## How they are made
-1. `tools/scenes.html` draws a scene on a canvas ("low tide": the night beach from the water, straight timber,
-   one warm light, wet sand that mirrors it; people show only as traces).
-2. `tools/stills.py <dir>` saves each scene as a PNG.
-3. `tools/overprint.py` prints it in two inks (deep sea + tangerine, a touch of gold) on cream paper.
+Since 27 Nov 2026 the pictures come from the film "Not a Festival": its type and Overprint shapes (drum disc,
+crossed bars, bowls, halftone), drawn by `marketing/video/not-a-festival/src/site.py` in the team's private repo
+(film.html + shapes.js). The older night-beach scenes (`tools/scenes.html`, `tools/stills.py`, `tools/overprint.py`)
+are no longer used on the page.
 
 | File (`public/assets/img/`) | Where | What it shows | Source |
 |---|---|---|---|
-| `build.webp` | Hero | A woven timber tower half built, ladder, one lamp, timber | scene `build` |
-| `burn.webp` | Not a festival | The tower burning, hand lights in a wide ring | scene `burn` |
-| `tent.webp` | Bring yourself | One lit tent, a flag, footprints, the moon | scene `tent` |
-| `sail.webp` | Bring art | Three masts strung with lit string, a ladder | scene `sail` |
-| `camp.webp` | Bring a camp | Shade sail, long shared table with lamps, tents | scene `camp` |
-| `dusk.webp` | Khanom | Sun going down over the sea | a frame of the earlier `dates` teaser (drawn in code; that scene has since been reworked) |
-| `gather.webp` | Community | Hand lights drawing in round one lamp | scene `gather` |
-| `share.jpg` | Link preview | Launch post 1 | our first launch post |
+| `build.webp` | Hero | Drum disc with rings, a tower of crossed bars, three bowls and a gift | "Not a Festival" film shapes (`site.py`) |
+| `burn.webp` | Not a festival | "Then we burn it together.", the word hot with sparks (no mark near it) | film frame (`site.py`) |
+| `tent.webp` | Bring yourself | Gold ground: one orange disc arriving, a hoop | film shapes (`site.py`) |
+| `sail.webp` | Bring art | The tower of crossed bars, the drum disc behind | film shapes (`site.py`) |
+| `camp.webp` | Bring a camp | Rust ground: five bowls, a gift passed along | film shapes (`site.py`) |
+| `dusk.webp` | Khanom | An orange sun over a halftone sea | film shapes (`site.py`) |
+| `gather.webp` | Community | Bowls in a ring round the drum disc | film shapes (`site.py`) |
+| `share.jpg` | Link preview | The launch post, square: disc, tower, SaWadee Burn, 2-7 March 2027 | launch post 1 |
 | `grain.png`, `ink.png` | Everywhere | Paper grain and ink speckle | generated noise |
 | Greeter figure | The welcome | Cut-bust greeter, gate only, never burnt | `brand-src/6a-wai-bust-cut-mark.svg` |
 | Logo | Nav, footer (animated: BURN glows) | Final lockup | `brand-src/final-lockup.svg` |
