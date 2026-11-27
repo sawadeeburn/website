@@ -158,6 +158,16 @@ main>.hero{padding-block:clamp(8px,1.5vw,20px) 0;min-height:calc(100svh - 68px);
 .hero-print{margin-bottom:clamp(20px,3vw,40px);align-self:stretch;min-height:clamp(240px,34vh,460px)}
 .hero-print img{position:absolute;inset:0;height:100%;object-fit:cover;object-position:60% 52%}
 .s-hero{left:-2.2em;top:-2.6em;--r:-9deg}
+/* countdowns: the first round, then the burn. Labels are page text; the numbers come from site.js */
+.count{display:grid;gap:.9rem;margin-top:clamp(16px,1.8vw,24px);padding-top:clamp(12px,1.4vw,18px);border-top:3px solid currentColor;max-width:26rem}
+.count[hidden],.cd[hidden]{display:none}
+.cd{display:grid;gap:.15rem;margin:0}
+.cd-l{font-weight:700;font-size:.9375rem;line-height:1.3}
+.cd-n{display:flex;flex-wrap:wrap;gap:.1em .55em;align-items:baseline;min-height:1em;font-family:Bricolage,"Arial Narrow",sans-serif;font-weight:800;font-stretch:75%;text-transform:uppercase;font-size:clamp(2rem,3.4vw,3rem);line-height:1;font-variant-numeric:tabular-nums}
+.cd-n:empty{display:none}
+.cd-n i{font-style:normal;white-space:nowrap}
+.cd-n small{font-size:.42em;margin-left:.12em;letter-spacing:.02em}
+.cd:first-child .cd-n{color:var(--hot)}
 /* the hero's one moment: the two plates are pulled, then the tangerine plate slides into register */
 .js .plate{animation:pull .9s var(--ease) both}
 .js .p2{animation-name:register;animation-duration:1.1s;animation-delay:.28s}

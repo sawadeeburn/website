@@ -118,4 +118,23 @@
     });
     none.hidden = shown > 0;
   });
+  /* --- countdowns: fill in the numbers; a countdown that has run out goes away --- */
+  const cds = $$('.cd[data-to]');
+  if (cds.length) {
+    const pad = n => String(n).padStart(2, '0');
+    const tick = () => {
+      const now = Date.now();
+      cds.forEach(c => {
+        const left = Date.parse(c.dataset.to) - now, out = c.querySelector('.cd-n');
+        if (left <= 0) { if (c.dataset.gone === 'hide') c.hidden = true; else out.textContent = ''; return; }
+        const s = Math.floor(left / 1000), d = Math.floor(s / 86400), h = Math.floor(s / 3600) % 24, m = Math.floor(s / 60) % 60;
+        const parts = [[d, d === 1 ? 'day' : 'days'], [pad(h), 'hrs'], [pad(m), 'min']];
+        if (!reduce) parts.push([pad(s % 60), 'sec']);
+        out.innerHTML = parts.map(([n, u]) => '<i>' + n + '<small>' + u + '</small></i>').join('');
+      });
+      const box = $('.count');
+      if (box && cds.every(c => c.hidden)) box.hidden = true;
+    };
+    tick(); setInterval(tick, reduce ? 30000 : 1000);
+  }
 })();
