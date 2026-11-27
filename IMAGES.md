@@ -23,10 +23,11 @@ are no longer used on the page.
 | Greeter figure | The welcome | Cut-bust greeter, gate only, never burnt | `brand-src/6a-wai-bust-cut-mark.svg` |
 | Logo | Nav, footer (animated: BURN glows) | Final lockup | `brand-src/final-lockup.svg` |
 | Route map | Getting there | Coast of the Gulf, Khanom town, Don Sak, islands, airports | Natural Earth 10m (public domain), `tools/map.py` |
-| `video/film.mp4`, `video/film-poster.webp` | Film | "Not a Festival", the type-only Overprint film (32.7 s), full length; poster = the NOT A FESTIVAL frame | `marketing/video/not-a-festival/film-web.mp4` (private repo), made in code, no AI images |
+| `video/film.mp4`, `video/film-poster.webp` | Film | "Not a Festival", the type-only Overprint film (32.7 s), full length, no dates in the frames; poster = the NOT A FESTIVAL frame | `marketing/video/not-a-festival/film-web.mp4` (private repo), made in code, no AI images |
 
 ## Checks done
 - No bicycles in any picture.
+- No dates in any picture or film frame; dates live in the page text only.
 - No site address, no pin on the site. The map dot is Khanom town. The film has no map.
 - No fire near the W or the greeter. The burn picture sits in its own section with no mark in it.
 - No temples, Buddha images, monks, royal symbols, alcohol, drugs, fireworks, sky lanterns or figure burns.
