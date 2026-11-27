@@ -1,0 +1,56 @@
+{
+  "sea": {
+    "hex": "#072F35",
+    "rgb": [
+      7,
+      47,
+      53
+    ],
+    "use": "Dark ground. Ink on cream."
+  },
+  "ink": {
+    "hex": "#16302F",
+    "rgb": [
+      22,
+      48,
+      47
+    ],
+    "use": "Text and the mark."
+  },
+  "cream": {
+    "hex": "#F2E4D2",
+    "rgb": [
+      242,
+      228,
+      210
+    ],
+    "use": "Paper ground."
+  },
+  "gold": {
+    "hex": "#F5C65A",
+    "rgb": [
+      245,
+      198,
+      90
+    ],
+    "use": "The badge, lamp light, small touches."
+  },
+  "tang": {
+    "hex": "#E4602A",
+    "rgb": [
+      228,
+      96,
+      42
+    ],
+    "use": "Big shapes and poster-size type only. Too weak for small text on cream."
+  },
+  "rust": {
+    "hex": "#973913",
+    "rgb": [
+      151,
+      57,
+      19
+    ],
+    "use": "Accent text on cream."
+  }
+}

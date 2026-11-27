@@ -1,0 +1,8 @@
+:root{
+  --sea: #072F35;   /* Dark ground. Ink on cream. */
+  --ink: #16302F;   /* Text and the mark. */
+  --cream: #F2E4D2;   /* Paper ground. */
+  --gold: #F5C65A;   /* The badge, lamp light, small touches. */
+  --tang: #E4602A;   /* Big shapes and poster-size type only. Too weak for small text on cream. */
+  --rust: #973913;   /* Accent text on cream. */
+}

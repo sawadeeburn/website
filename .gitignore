@@ -1,0 +1,4 @@
+banned.local.txt
+.DS_Store
+__pycache__/
+tools/.tilecache/
