@@ -267,6 +267,7 @@ def build():
     (PUB / "assets/motion").mkdir(exist_ok=True)
     for f in ("assets.js", "sawadee-motion.js"): shutil.copy(FC / "motion" / f, PUB / "assets/motion" / f)
     shutil.copy(FC / "final-badge-avatar.svg", PUB / "favicon.svg")
+    shutil.copy(HERE / "src/draft-concept.html", PUB / "draft-concept.html")   # CONCEPT only
     (PUB / "404.html").write_text(t.split("<main")[0].replace("<title>", "<title>Not found · ").replace('"assets/', '"/assets/').replace('"favicon.svg', '"/favicon.svg').replace('href="#', 'href="/#') +
         '<main id="main"><section class="hero f-paper lost"><div class="wrap"><h1 class="big"><span class="fit">Lost on the beach.</span></h1>'
         '<p class="lede">This page does not exist. The burn does.</p><p><a class="btn" href="/">Back to the start</a></p></div></section></main>'

@@ -425,3 +425,26 @@ main>.community{padding-bottom:0;overflow:hidden}
   *,*::before,*::after{animation:none!important;transition:none!important}
   .map .rt.on path{stroke-dashoffset:0}
 }
+
+/* ================= CONCEPT "Overprint, quieter" (branch concept/overprint-quiet) =================
+   Same brand: the W, Bricolage, two inks, paper grain, the wai welcome. Less of it at once:
+   one print (hero), one loud band (the welcome), the night map, two stickers, fewer words. */
+.hero-copy .social{margin-top:1.6rem}
+.burn-grid{align-items:center}
+.burn .claims{margin-block:0}
+.burn .claims b{font-size:clamp(1.8rem,3vw,2.8rem)}
+.door-grid{margin-top:clamp(24px,3vw,40px)}
+.door h3{font-size:clamp(2.6rem,4.8vw,4.6rem)}
+.aside{margin-top:clamp(24px,3vw,40px);font-weight:600}
+.aside .link{margin-left:.3em}
+.tickets-grid{grid-template-columns:minmax(0,6fr) minmax(0,6fr)}
+.tickets-main .lede{margin-block:1.2rem 1.6rem}
+.tickets .rules{grid-template-columns:minmax(0,1fr);margin-top:0}
+.tickets .rules b{font-size:1.25rem}
+.care-links{display:flex;gap:1.6rem;margin-top:1.2rem}
+.plist-box{margin-top:2rem;border-bottom:3px solid var(--ink)}
+.plist-box .plist{grid-template-columns:minmax(0,1fr);margin-block:.4rem 1rem}
+.plist-box .plist h3{font-size:clamp(1.3rem,2vw,1.7rem)}
+.plist-box .plist li::before{font-size:clamp(1.4rem,2.2vw,2rem)}
+.plist-box .small{padding-bottom:1rem}
+@media (max-width:900px){.tickets-grid{grid-template-columns:minmax(0,1fr)}}
