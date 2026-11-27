@@ -252,6 +252,65 @@ def build_brand(v):
     for f in ("brand.css", "brand.js"): shutil.copy(HERE / "src" / f, PUB / "assets" / f)
     print("built", PUB / "brand/index.html", len(t) // 1024, "KB")
 
+# ---------- /crews: the crew board. Data in crews.json (opt-in, public). Points don't matter, no prizes. ----------
+# Each crew: slug (a-z0-9-, its short link), name, flag (file in crews-flags/ or ""), code (3 characters from the
+# pre-made pool; the Ticketmelon affiliate link is aff1=crew-<code>, e.g. crew-kzt, so names can change any time), tickets (from that
+# link), line (optional, one short line), live (true once its Ticketmelon link exists).
+CREW_START = ("mailto:ticketing@sawadeeburn.com?subject=Start%20a%20crew&body=Crew%20name%3A%20%0A"
+              "Your%20first%20name%3A%20%0AWhatsApp%3A%20%0AOne%20line%20about%20your%20crew%20(optional)%3A%20%0A%0A"
+              "Attach%20a%20picture%20for%20your%20flag%20if%20you%20have%20one.")
+FLAG_INKS = [("var(--gold)", "var(--sea)"), ("var(--tang)", "#04191D"), ("var(--sea)", "var(--cream)"), ("var(--rust)", "var(--cream)")]
+
+def crew_flag(c):
+    if c.get("flag"):
+        return f'<img class="flag" src="/crews/flags/{html.escape(c["flag"])}" alt="" width="96" height="96" loading="lazy">'
+    bg, fg = FLAG_INKS[sum(map(ord, c["slug"])) % len(FLAG_INKS)]
+    ini = "".join(w[0] for w in re.findall(r"[A-Za-z0-9]+", c["name"])[:2]).upper() or "?"
+    return f'<span class="flag flag-ini" style="--fb:{bg};--ff:{fg}" aria-hidden="true">{html.escape(ini)}</span>'
+
+def build_crews(v, head, foot, data=None):
+    crews = data if data is not None else json.loads((HERE / "crews.json").read_text())
+    for c in crews:
+        assert re.fullmatch(r"[a-z0-9-]{2,40}", c["slug"]), f"bad crew slug: {c['slug']}"
+    crews = sorted(crews, key=lambda c: (-c.get("tickets", 0), c["name"].lower()))
+    rows = ""
+    for i, c in enumerate(crews):
+        n = int(c.get("tickets", 0))
+        lamps = "".join(f'<i style="--d:{(j % 12) * 60}ms"></i>' for j in range(n)) or '<em>No lamps yet. Soon.</em>'
+        line = f'<p class="crew-line">{html.escape(c["line"])}</p>' if c.get("line") else ""
+        link = f'<a class="crew-link" href="/crew/{c["slug"]}">sawadeeburn.com/crew/{c["slug"]}</a>' if c.get("live") else ""
+        rows += (f'      <li class="crew" style="--r:{((i * 37) % 7 - 3) * .4}deg">{crew_flag(c)}<div class="crew-body">'
+                 f'<h3>{html.escape(c["name"])}</h3>{line}<p class="lamps" aria-label="{n} lamp{"s" if n != 1 else ""} lit">{lamps}</p>{link}</div></li>\n')
+    if not crews:
+        rows = '      <li class="crew crew-empty"><span class="flag flag-ini" style="--fb:var(--gold);--ff:var(--sea)" aria-hidden="true">?</span><div class="crew-body"><h3>Your crew here</h3><p class="crew-line">The board is empty. Be the first flag on it.</p></div></li>\n'
+    note = "The order changes every time someone buys a ticket. Or every time you press the button." if len(crews) > 1 else "Crews show up here as they start."
+    t = (HERE / "src/crews-body.html").read_text()
+    for k, val in {"BOARD": rows, "BOARD_NOTE": note, "START_URL": CREW_START, "SHUFFLE_HIDDEN": "" if len(crews) > 1 else "hidden"}.items():
+        t = t.replace("{{" + k + "}}", val)
+    page = (head.replace("<title>SaWadee Burn", "<title>Crews · SaWadee Burn", 1)
+                .replace('content="A community-created', 'content="Start a crew, get your own link, light lamps on the board. Points don\'t matter. A community-created', 1)
+            + t + foot)
+    assert "{{" not in page, re.findall(r"\{\{\w+\}\}", page)
+    low = re.sub(r"<[^>]+>", " ", page).lower()
+    for bad in BANNED:
+        assert bad not in low, f"banned text on the crews page: {bad}"
+    (PUB / "crews").mkdir(exist_ok=True)
+    (PUB / "crews/index.html").write_text(page)
+    flags = HERE / "crews-flags"
+    if flags.is_dir():
+        shutil.copytree(flags, PUB / "crews/flags", dirs_exist_ok=True)
+    # short links: /crew/<slug> -> Ticketmelon with the crew's affiliate code (only once its link exists there)
+    redir = "".join(f'/crew/{c["slug"]} {TICKETS}?aff1=crew-{c["code"]} 302\n' for c in crews if c.get("live"))
+    (PUB / "_redirects").write_text(redir)
+    print("built", PUB / "crews/index.html", len(crews), "crews,", redir.count("\n"), "links")
+
+def site_shell(t):
+    """Header and footer of the home page, with links made absolute, for the sub-pages."""
+    fix = lambda s: s.replace('"assets/', '"/assets/').replace('"favicon.svg', '"/favicon.svg').replace('href="#', 'href="/#').replace('href="brand/', 'href="/brand/')
+    head = fix(t.split("<main")[0])
+    foot = fix(t[t.index('<footer'):]).replace('</body>', '<script src="/assets/crews.js?v=' + str(int(time.time())) + '" defer></script>\n</body>')
+    return head, foot
+
 def build():
     t = (HERE / "src/index.html").read_text()
     rep = {"LOGO": LOGO, "MARK": MARK, "GREETER": GREETER, "TICKER": TICKER, "TICKETS": TICKETS, "MAP": map_svg(),
@@ -263,7 +322,7 @@ def build():
         assert bad not in low, f"banned text on the page: {bad}"
     PUB.mkdir(exist_ok=True)
     (PUB / "index.html").write_text(t)
-    for f in ("site.css", "site.js"): shutil.copy(HERE / "src" / f, PUB / "assets" / f)
+    for f in ("site.css", "site.js", "crews.js"): shutil.copy(HERE / "src" / f, PUB / "assets" / f)
     (PUB / "assets/motion").mkdir(exist_ok=True)
     for f in ("assets.js", "sawadee-motion.js"): shutil.copy(FC / "motion" / f, PUB / "assets/motion" / f)
     shutil.copy(FC / "final-badge-avatar.svg", PUB / "favicon.svg")   # the W badge stays the tab icon (the symbol blurs at 16px)
@@ -279,6 +338,7 @@ def build():
     (PUB / "robots.txt").write_text("User-agent: *\nDisallow: /\n")
     print("built", PUB / "index.html", len(t) // 1024, "KB")
     build_brand(rep["V"])
+    build_crews(rep["V"], *site_shell(t))
 
 if __name__ == "__main__":
     build()

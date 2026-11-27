@@ -462,3 +462,35 @@ main>.community{padding-bottom:0;overflow:hidden}
 main>.community{padding-bottom:clamp(72px,9vw,132px);overflow:visible}
 .community .s-crew{top:auto;bottom:-1.4em}
 @media (max-width:900px){.burn .burn-grid{grid-template-columns:minmax(0,1fr)}.burn .player{justify-self:center}}
+
+/* ---------- /crews: the crew board ---------- */
+.crews-small{margin-top:clamp(10px,1.2vw,16px);font-weight:600;max-width:42ch;opacity:.85}
+.crews-hero .hero-actions{margin-top:clamp(22px,2.4vw,34px)}
+.board-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 28px}
+.board-head h2{flex:1 1 auto}
+.shuffle{transform:rotate(-2deg)}
+.shuffle:hover{transform:rotate(-2deg) translate(-4px,-4px)}
+.board-note{margin-top:clamp(14px,1.6vw,22px);font-weight:600;max-width:52ch;opacity:.85}
+.crew-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,330px),1fr));gap:clamp(16px,2vw,28px);margin-top:clamp(28px,3.4vw,52px)}
+.crew{display:flex;gap:18px;align-items:flex-start;background:var(--cream);color:var(--sea);padding:20px;transform:rotate(calc(var(--r,0deg) * .5));box-shadow:6px 6px 0 var(--gold);transition:transform .5s var(--ease)}
+.crew:hover{transform:rotate(0deg) translateY(-4px)}
+.crew.moving{transition:none}
+.flag{flex:none;width:76px;height:76px;border-radius:50%;object-fit:cover;background:var(--gold)}
+.flag-ini{display:grid;place-items:center;background:var(--fb);color:var(--ff);font-family:Bricolage,sans-serif;font-stretch:75%;font-weight:800;font-size:2rem;line-height:1}
+.crew-body{min-width:0}
+.crew h3{font-family:Bricolage,sans-serif;font-stretch:75%;font-weight:800;text-transform:uppercase;font-size:clamp(1.5rem,2.2vw,2rem);line-height:.95;overflow-wrap:anywhere}
+.crew-line{margin-top:6px;font-size:.95rem;font-weight:600}
+.lamps{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;min-height:18px}
+.lamps i{width:16px;height:16px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 2px var(--sea),0 0 12px 2px rgba(245,198,90,.9)}
+.js .lamps i{animation:glow 2.6s ease-in-out var(--d,0ms) infinite alternate}
+@keyframes glow{from{box-shadow:0 0 0 2px var(--sea),0 0 4px 0 rgba(245,198,90,.5)}to{box-shadow:0 0 0 2px var(--sea),0 0 16px 4px rgba(245,198,90,1)}}
+.lamps em{font-style:normal;font-size:.9rem;font-weight:600;opacity:.75}
+.crew-link{display:inline-block;margin-top:12px;font-size:.85rem;font-weight:700;color:var(--rust);overflow-wrap:anywhere}
+.crew-empty{box-shadow:6px 6px 0 var(--tang);border:3px dashed var(--sea)}
+.start-grid{display:grid;gap:clamp(24px,3vw,44px)}
+.steps{display:grid;gap:14px;counter-reset:s;max-width:60ch}
+.steps li{counter-increment:s;display:grid;grid-template-columns:auto 1fr;gap:14px;font-weight:600;font-size:clamp(1.02rem,1.3vw,1.2rem)}
+.steps li::before{content:counter(s);display:grid;place-items:center;width:2em;height:2em;border-radius:50%;background:var(--sea);color:var(--cream);font-family:Bricolage,sans-serif;font-weight:800}
+.steps b{font-weight:800}
+@media (min-width:900px){.start-grid{grid-template-columns:1fr 1.1fr;align-items:start;align-content:start}.start-grid h2{grid-row:1/span 3}.start-cta,.start-grid>.crews-small{grid-column:2}}
+@media (prefers-reduced-motion:reduce){.js .lamps i{animation:none}.crew{transition:none}}

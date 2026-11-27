@@ -1,0 +1,48 @@
+<main id="main">
+
+<section class="hero f-paper crews-hero" aria-labelledby="h-crews">
+  <div class="wrap">
+    <h1 class="big hero-h" id="h-crews">
+      <span class="fit plate p1">Crews.</span>
+      <span class="fit plate p2" data-w=".8">Points don't matter.</span>
+    </h1>
+    <div class="hero-row">
+      <div class="hero-copy">
+        <p class="lede">Coming with friends? Start a crew. You get a name, a flag and your own ticket link. Every ticket bought through it lights a lamp on this board.</p>
+        <p class="crews-small">Nobody wins anything. The lamps are just for fun, and coming alone is great too.</p>
+        <p class="hero-actions">
+          <a class="btn" href="#start">Start a crew</a>
+          <a class="link" href="#board">See the board</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="board f-sea" id="board" aria-labelledby="h-board">
+  <div class="wrap">
+    <div class="board-head">
+      <h2 class="big" id="h-board"><span class="fit" data-w=".6">The board</span></h2>
+      <button class="btn btn-gold shuffle" type="button" id="shuffle" {{SHUFFLE_HIDDEN}}>Shuffle it</button>
+    </div>
+    <p class="board-note" id="board-note">{{BOARD_NOTE}}</p>
+    <ol class="crew-list" id="crew-list">
+{{BOARD}}
+    </ol>
+  </div>
+</section>
+
+<section class="start f-gold" id="start" aria-labelledby="h-start">
+  <div class="wrap start-grid">
+    <h2 class="big" id="h-start"><span class="fit">Start</span><span class="fit" data-w=".7">a crew.</span></h2>
+    <ol class="steps">
+      <li><span><b>Pick a name and a flag.</b> Any picture works: a drawing, a photo of your shirt, a doodle.</span></li>
+      <li><span><b>Get your link.</b> sawadeeburn.com/crew/your-name. It goes straight to the ticket page.</span></li>
+      <li><span><b>Send it to your people.</b> Each ticket through it lights a lamp.</span></li>
+    </ol>
+    <p class="start-cta"><a class="btn btn-sea btn-big" href="{{START_URL}}" rel="noopener">Start a crew</a></p>
+    <p class="crews-small">A crew with a gift for everyone can grow into a camp. <a class="link" href="https://www.sawadeeburn.com/camps" rel="noopener">How camps work</a></p>
+  </div>
+</section>
+
+</main>
